@@ -3,10 +3,19 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 8000;
+
+// cors error remove on vercel
+const corsConfig = {
+  origin: "",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+app.use(cors(corsConfig));
+app.options("", cors(corsConfig));
 
 // Schema
 const schemaData = mongoose.Schema(
